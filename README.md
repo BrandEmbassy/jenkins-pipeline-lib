@@ -12,8 +12,11 @@ In section _Administration_ > _System Configuration_ > _Global Pipeline Librarie
 - _Allow default version to be overridden_: allow to override _Default version_ using `@Library` annotation;
 - _Retrieval method_
   - check _Modern SCM_;
-  - check _GitHub source_;
-  - _GitHub project url_: `https://github.com/BrandEmbassy/infra-ci-lib`;
+  - check _Git_: **DO NOT USE** _GitHub source_, as there is currently bug;
+  - _Project Repository_: `https://github.com/BrandEmbassy/infra-ci-lib`;
+  - _Credentials_: for private repository use _Username with password_ credentials, if you don't prepared the
+    credentials in advance, save current settings **BEFORE** you add credentials, add them in separate configuration 
+    step;
 
 
 ## Library
