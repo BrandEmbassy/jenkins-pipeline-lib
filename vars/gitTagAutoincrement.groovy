@@ -20,7 +20,8 @@ def call(String projectGitRepo, String buildVersion) {
             | sed -E 's/refs\\/tags\\///' \
             | awk -F'.' '{\$3+=1}{print \$0RT}' OFS='.' ORS='' \
             | sed -E 's/(([0-9]+[.]{0,1}){3})(.*)/\\1/' \
-            | sed -E 's/[.]\$//'
+            | sed -E 's/[.]\$//' \
+            | (grep ^ || echo \"${buildVersion}.0\")
       
     """.stripIndent(),
     returnStdout: true
