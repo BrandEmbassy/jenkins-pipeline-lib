@@ -16,9 +16,9 @@ def call(String env, String jobPath, String jobName, String parameterName, Strin
       def buildEnv = build.getEnvironment(hudson.model.TaskListener.NULL)
       def buildRevision = buildEnv.get(parameterName) ?: ''
 
-      if (forcedRevision === '' && buildRevision ==~ revisionFilter) {
+      if (forcedRevision == '' && buildRevision ==~ revisionFilter) {
         builds.add(buildRevision)
-      } else if (forcedRevision === buildRevision && forcedRevision ==~ revisionFilter) {
+      } else if (forcedRevision == buildRevision && forcedRevision ==~ revisionFilter) {
         builds.add(buildRevision)
         break
       }
