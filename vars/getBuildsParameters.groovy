@@ -5,7 +5,7 @@
 def call(String env, String jobPath, String jobName, String parameterName, String forcedRevision = '') {
   String revisionFilter = /.*/
 
-  if (forcedRevision != '' && env in ['staging', 'prod']) {
+  if (forcedRevision != '') {
     revisionFilter = /^[v]?\d+([.]\d+){1,3}$/
   }
 
@@ -28,6 +28,10 @@ def call(String env, String jobPath, String jobName, String parameterName, Strin
         break
       }
     }
+  }
+
+  if (builds.isEmpty()){
+    error("Could not resolve any build with parameter ${parameterName} for ${jobName}")
   }
 
   return builds.toList()
