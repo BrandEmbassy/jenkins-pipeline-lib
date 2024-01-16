@@ -2,7 +2,7 @@
  * `getBuildsParameters` method gets builds' parameters list by parameter name
  */
 @NonCPS
-def call(String env, String jobPath, String jobName, String parameterName, String forcedRevision = '') {
+def call(String env, String jobPath, String jobName, String parameterName, String forcedRevision = '', String forcedRevisionFilter = '') {
   String revisionFilter = /.*/
 
   if (forcedRevision != '') {
@@ -10,7 +10,12 @@ def call(String env, String jobPath, String jobName, String parameterName, Strin
   }
 
   if (revisionFilter == /.*/ && env in ['staging', 'prod']) {
-    revisionFilter = /^[v]?\d+([.]\d+){1,2}$/
+    revisionFilter = /^[v]?\d+([.]\d+){1,3}$/
+  }
+
+  // Some of the jobs have a different revision format (e.g. "@brandembassy/cxone-channel-guide@2.0.66")
+  if (forcedRevisionFilter != '') {
+    revisionFilter = forcedRevisionFilter
   }
 
   Set<String> builds = []
